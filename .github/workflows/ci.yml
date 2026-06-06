@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Installation JDK 21
         uses: actions/setup-java@v4
@@ -25,12 +23,3 @@ jobs:
 
       - name: Compilation et Tests
         run: mvn clean verify
-
-      - name: Analyse SonarQube
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn sonar:sonar \
-            -Dsonar.projectKey=stockcontroller \
-            -Dsonar.projectName=stockcontroller \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
